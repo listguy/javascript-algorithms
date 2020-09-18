@@ -1,7 +1,8 @@
-import LinkedList from '../linked-list/LinkedList';
+import LinkedList from "../linked-list/LinkedList";
 
 export default class Queue {
   constructor() {
+    this.data = [];
     // We're going to implement Queue based on LinkedList since the two
     // structures are quite similar. Namely, they both operate mostly on
     // the elements at the beginning and the end. Compare enqueue/dequeue
@@ -13,7 +14,8 @@ export default class Queue {
    * @return {boolean}
    */
   isEmpty() {
-    return !this.linkedList.head;
+    // return !this.linkedList.head;
+    return this.data.length === 0;
   }
 
   /**
@@ -21,11 +23,12 @@ export default class Queue {
    * @return {*}
    */
   peek() {
-    if (!this.linkedList.head) {
-      return null;
-    }
+    // if (!this.linkedList.head) {
+    //   return null;
+    // }
 
-    return this.linkedList.head.value;
+    // return this.linkedList.head.value;
+    return this.data.isEmpty() ? null : this.data[0];
   }
 
   /**
@@ -34,7 +37,8 @@ export default class Queue {
    * @param {*} value
    */
   enqueue(value) {
-    this.linkedList.append(value);
+    // this.linkedList.append(value);
+    this.data.push(value);
   }
 
   /**
@@ -43,16 +47,19 @@ export default class Queue {
    * @return {*}
    */
   dequeue() {
-    const removedHead = this.linkedList.deleteHead();
-    return removedHead ? removedHead.value : null;
+    // const removedHead = this.linkedList.deleteHead();
+    // return removedHead ? removedHead.value : null;
+
+    return this.data.peek() ? this.data.shift() : null;
   }
 
   /**
    * @param [callback]
    * @return {string}
    */
-  toString(callback) {
+  toString(callback = (x) => x) {
     // Return string representation of the queue's linked list.
-    return this.linkedList.toString(callback);
+    // return this.linkedList.toString(callback);
+    return this.data.map(callback).toString();
   }
 }
